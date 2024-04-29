@@ -1,0 +1,117 @@
+<section class="section-super">
+  <div class="super">
+    <div class="super--container">
+      <div *ngIf="tasks" class="super--container-div1">
+        <div>
+          <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+            <mat-button-toggle (click)="showTotal()">Total</mat-button-toggle>
+            <mat-button-toggle (click)="showSend()">Send</mat-button-toggle>
+            <mat-button-toggle (click)="showNoSend()">No Send</mat-button-toggle>
+            <mat-button-toggle (click)="showLater()">Send Later</mat-button-toggle>
+            <mat-button-toggle (click)="showNoLater()">Send At Time</mat-button-toggle>
+          </mat-button-toggle-group>
+          <div *ngIf="isTotal">
+            <div *ngFor="let task of tasks">
+              <mat-accordion>
+                <mat-expansion-panel hideToggle>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      <h3 class="super--container-div1-title">
+                        {{task.name}}
+                      </h3>
+                      <span *ngIf="task.status;else noSend">
+                        <i class="bi bi-check-circle-fill" style="font-size:30px;color:green;"></i>
+                      </span>
+                      <span *ngIf="task.later == false;">
+                        <i class="bi bi-stopwatch-fill" style="font-size:30px;color:green;"></i>
+                      </span>
+                      <span *ngIf="task.later == true;">
+                        <i class="bi bi-stopwatch-fill" style="font-size:30px;color:red;"></i>
+                      </span>
+                      <span *ngIf="task.later == null">
+                        <i class="bi bi-stopwatch-fill" style="font-size:30px;color:gray;"></i>
+                      </span>
+                      <h3 class="super--container-div1-date">
+                        Enviar antes de:
+                        {{task.dateSender | date:'dd - MMM - yyyy , EEEE'}} a las:
+                        {{('1970-01-01T' + task.hour) | date:'HH:mm'}}hrs
+                      </h3>
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      Click me for details
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <h3>Periodicity: {{task.periodicity}}</h3>
+                  <h3>Hour: {{task.hour}}</h3>
+                  <h3>Addressee: {{task.addressee}}</h3>
+                  <h3>Sender Name: {{task.sender.email}}</h3>
+
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div *ngIf="tasksFilter != undefined">
+            <div *ngFor="let task of tasksFilter">
+              <mat-accordion>
+                <mat-expansion-panel hideToggle>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      <h3 class="super--container-div1-title">
+                        {{task.name}}
+                      </h3>
+                      <span *ngIf="task.status;else noSend">
+                        <i class="bi bi-check-circle-fill" style="font-size:30px;color:green;"></i>
+                      </span>
+                      <span *ngIf="task.later == false;">
+                        <i class="bi bi-stopwatch-fill" style="font-size:30px;color:green;"></i>
+                      </span>
+                      <span *ngIf="task.later == true;">
+                        <i class="bi bi-stopwatch-fill" style="font-size:30px;color:red;"></i>
+                      </span>
+                      <span *ngIf="task.later == null">
+                        <i class="bi bi-stopwatch-fill" style="font-size:30px;color:gray;"></i>
+                      </span>
+                      <h3 class="super--container-div1-date">
+                        Enviar antes de:
+                        {{task.dateSender | date:'dd - MMM - yyyy , EEEE'}} a las:
+                        {{('1970-01-01T' + task.hour) | date:'HH:mm'}}hrs
+                      </h3>
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      Click me for details
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <h3>Periodicity: {{task.periodicity}}</h3>
+                  <h3>Hour: {{task.hour}}</h3>
+                  <h3>Addressee: {{task.addressee}}</h3>
+                  <h3>Sender Name: {{task.sender.email}}</h3>
+
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="super--container-div2">
+        <canvas #chart></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+<ng-template #noSend>
+  <span>
+    <i class="bi bi-slash-circle" style="font-size:30px;color:orange;"></i>
+  </span>
+</ng-template>
+

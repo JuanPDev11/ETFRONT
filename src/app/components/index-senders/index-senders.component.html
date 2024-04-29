@@ -1,0 +1,61 @@
+<section class="section-senders">
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+  </mat-form-field>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Email</th>
+        <td mat-cell *matCellDef="let row"> {{row.email}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="serverIMAP">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Server IMAP </th>
+        <td mat-cell *matCellDef="let row"> {{row.serverIMAP}}% </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="serverSMTP">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Server SMTP</th>
+        <td mat-cell *matCellDef="let row"> {{row.serverSMTP}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="portIMAP">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Port IMAP </th>
+        <td mat-cell *matCellDef="let row"> {{row.portIMAP}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="portSMTP">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Port SMTP </th>
+        <td mat-cell *matCellDef="let row"> {{row.portSMTP}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          <button style="background: #3A5B22;" routerLink="/addSender" mat-flat-button color="primary">Add Sender</button>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <i routerLink="/addSender/{{row.id}}" class="bi bi-pencil" style="font-size:25px;color:blue;cursor:pointer;margin-right:20px;"></i>
+          <i class="bi bi-trash" (click)="deleteSender(row.id)" style="font-size:25px;color:red;cursor:pointer;"></i>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+  </div>
+</section>
+

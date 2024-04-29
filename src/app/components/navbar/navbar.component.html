@@ -1,0 +1,69 @@
+<nav class="navbar">
+  <h2 class="navbar--title" routerLink=""> <img src="https://s3nft.s3.us-east-2.amazonaws.com/logoSGT.webp" /></h2>
+  <div class="navbar--links">
+    <ul class="navbar--list" *ngIf="token == 'Analist'">
+      <li><a class="navbar--link" routerLink="/indexTasks">Manage Tasks</a></li>
+      <li><a class="navbar--link" routerLink="/indexAnalist">Analist Interface </a></li>
+      <li *ngIf="(service.user$ | async) as user">
+        <span>
+          <strong class="navbar--account-hi">Hi</strong>
+          {{user.name | titlecase}}
+        </span>
+      </li>
+      <li>
+        <button (click)="logout()" class="navbar--btn" mat-fab extended color="primary">
+          Logout
+        </button>
+      </li>
+
+    </ul>
+
+    <ul class="navbar--list" *ngIf="token == 'Supervisor'">
+      <li><a class="navbar--link" routerLink="/indexSuper">Supervisor Interface </a></li>
+      <li><a class="navbar--link" routerLink="/indexAnalist">Analist Interface </a></li>
+      <li><a class="navbar--link" routerLink="/indexTasks">Manage Tasks</a></li>
+      <li><a class="navbar--link" routerLink="/indexSenders">Senders </a></li>
+      <li><a class="navbar--link" routerLink="/indexUsers">Users </a></li>
+
+      <li *ngIf="(service.user$ | async) as user">
+        <span>
+          <strong class="navbar--account-hi">Hi</strong>
+          {{user.name | titlecase}}
+        </span>
+      </li>
+      <li>
+        <button (click)="logout()" class="navbar--btn" mat-fab extended color="primary">
+          Logout
+        </button>
+      </li>
+
+    </ul>
+
+    <ul class="navbar--list" *ngIf="token == 'User'">
+      <li><a class="navbar--link" routerLink="/indexTasks">Manage Tasks</a></li>
+
+      <li *ngIf="(service.user$ | async) as user">
+        <span>
+          <strong class="navbar--account-hi">Hi</strong>
+          {{user.name | titlecase}}
+        </span>
+      </li>
+      <li>
+        <button (click)="logout()" class="navbar--btn" mat-fab extended color="primary">
+          Logout
+        </button>
+      </li>
+    </ul>
+
+    <ul class="navbar--account navbar--list" *ngIf="(service.user$ | async) === null">
+      <li>
+        <button routerLink="/account/register" class="navbar--btn" mat-fab extended color="primary">
+          Register
+        </button>
+      </li>
+      <li><button class="navbar--btn" routerLink="/account/login" mat-fab extended color="primary">Login</button></li>
+    </ul>
+
+
+  </div>
+</nav>

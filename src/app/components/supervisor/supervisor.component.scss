@@ -1,0 +1,28 @@
+.super {
+
+  &--container {
+    display: flex;
+
+    &-div1 {
+      width: 60%;
+
+      &-title {
+        width: 270px;
+        min-width: 270px;
+        max-width: 270px;
+      }
+
+      &-date {
+        width: 480px;
+        min-width: 480px;
+        max-width: 480px;
+        margin-left: 30px;
+      }
+    }
+
+    &-div2 {
+      width: 40%;
+      height: 70vh;
+    }
+  }
+}

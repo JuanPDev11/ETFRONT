@@ -1,0 +1,34 @@
+<div class="form">
+  <div class="form--container">
+    <div class="form--container-div1">
+      <div class="form--container-div1-texts-container">
+        <h2 class="form--container-div1-texts-container-title">Welcome Back!</h2>
+        <h3 class="form--container-div1-texts-container-paragraph">Enter your Credentials to access your account</h3>
+      </div>
+      <form class="form--container-div1-form" [formGroup]="formLogin" (ngSubmit)="submit()">
+
+        <mat-form-field class="form--container-div1-form-field" appearance="fill">
+          <mat-label>UserName(Email)</mat-label>
+          <input class="form--container-div1-form-field-input" matInput formControlName="UserName">
+        </mat-form-field>
+
+        <mat-form-field class="form--container-div1-form-field" appearance="fill">
+          <mat-label>Password</mat-label>
+          <input class="form--container-div1-form-field-input" type="password" matInput formControlName="Password">
+        </mat-form-field>
+
+        <div *ngIf="errorMessages.length > 0">
+          <app-validation-messages [errorMessages]="errorMessages"></app-validation-messages>
+        </div>
+
+        <button type="submit" class="form--container-div1-form-btn" mat-fab extended color="primary">
+          Login
+        </button>
+        <h3 class="form--container-div1-form-have">Don't have an account? <a routerLink="/account/register">Sign Up</a></h3>
+      </form>
+    </div>
+    <div class="form--container-div2">
+      <img class="form--container-div2-img" src="https://s3nft.s3.us-east-2.amazonaws.com/BACKLOG.png" />
+    </div>
+  </div>
+</div>

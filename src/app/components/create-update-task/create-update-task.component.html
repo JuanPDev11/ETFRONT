@@ -1,0 +1,70 @@
+<div class="create">
+  <div class="create--container"> 
+    <div class="create--container-div1">
+      <div class="create--container-div1-texts">
+        <h2 class="create--container-div1-texts-title" *ngIf="ID > 0;else createtitle">{{'Update'}} Task</h2>
+      </div>
+      <div class="create--container-div1-form-container">
+        <form class="create--container-div1-form-container-form" [formGroup]="formTask" (ngSubmit)="submit()">
+          <mat-form-field class="create--container-div1-form-container-form-field" appearance="fill">
+            <mat-label>Name</mat-label>
+            <input class="" matInput formControlName="name">
+          </mat-form-field>
+
+          <mat-form-field class="create--container-div1-form-container-form-field" appearance="fill">
+            <mat-label>Periodicity</mat-label>
+            <mat-select formControlName="periodicity" >
+              <mat-option [value]="periods[0]">Daily</mat-option>
+              <mat-option [value]="periods[1]">Weekly</mat-option>
+              <mat-option [value]="periods[2]">Monthly</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="create--container-div1-form-container-form-field" appearance="fill">
+            <mat-label>Fecha</mat-label>
+            <input matInput [matDatepicker]="pickerDate" formControlName="date" >
+            <mat-datepicker-toggle matSuffix [for]="pickerDate"></mat-datepicker-toggle>
+            <mat-datepicker #pickerDate></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field class="create--container-div1-form-container-form-field" appearance="fill">
+            <mat-label>Hour</mat-label>
+            <input matInput [ngxTimepicker]="picker" [format]="24" formControlName="hour">
+            <ngx-material-timepicker #picker></ngx-material-timepicker>
+          </mat-form-field>
+
+          <mat-form-field class="create--container-div1-form-container-form-field" appearance="fill">
+            <mat-label>Addressee</mat-label>
+            <input (keyup)="onChange()" matInput formControlName="addressee">
+            @if (formTask.get('addressee')?.invalid) {
+            <mat-error>{{errorMessage}}</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field class="create--container-div1-form-container-form-field" appearance="fill">
+            <mat-label>Sender</mat-label>
+
+            <mat-select formControlName="sender">
+              <mat-option *ngFor="let sen of senders" [value]="sen.id">{{sen.email}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <button type="submit" class="create--container-div1-form-container-form-btn" mat-fab extended color="primary" *ngIf="ID > 0;else createbutton">
+            {{'Update'}} Task
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="create--container-div2">
+      <img class="create--container-div2-img" src="https://s3nft.s3.us-east-2.amazonaws.com/BACKLOG.png" />
+    </div>
+  </div>
+</div>
+
+<ng-template #createtitle>
+  <h1 class="create--container-div1-texts-title">Create Task</h1>
+</ng-template>
+<ng-template #createbutton>
+  <button type="submit"  class="create--container-div1-form-container-form-btn" mat-fab extended color="primary">Create Task</button>
+</ng-template>
+
